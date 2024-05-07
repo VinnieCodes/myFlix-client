@@ -1,67 +1,97 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { BookCard } from "../book-card/book-card";
-import { BookView } from "../book-view/book-view";
+import { MovieCard } from "../movie-card/movie-card";
+import { MovieView } from "../movie-view/movie-view";
 
 export const MainView = () => {
-  const [books, setBooks] = useState([
+  const [movies, setMovies] = useState([
     {
-      id: 1,
-      title: "Eloquent JavaScript",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51InjRPaF7L._SX377_BO1,204,203,200_.jpg",
-      author: "Marijn Haverbeke",
+      ID: "1",
+      title: "Shrek",
+      Description:
+        "A green ogre embarks on a quest to rescue a princess and discovers the true meaning of friendship",
+      Year: "2001",
+      Genre: {
+        GenreID: "1",
+        Name: "Animation",
+        Description: "Moving images created from a series of pictures.",
+      },
+      Director: {
+        DirectorID: "1",
+        Name: "Andrew Adamson",
+        Birth: 1966,
+        Bio: "Andrew Adamson is a New Zealand filmmaker known for directing the popular animated films 'Shrek' and 'Shrek 2,' bringing humor and heart to the big screen.",
+      },
+      Featured: "yes",
+      ImageURL:
+        "https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg",
     },
+
     {
-      id: 2,
-      title: "Mastering JavaScript Functional Programming",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51WAikRq37L._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-      author: "Federico Kereki",
+      ID: "2",
+      title: "Shrek 2",
+      Description:
+        "Shrek and Fiona visit Fiona's parents in the kingdom of Far Far Away, facing new challenges and humorous adventures",
+      Year: "2004",
+      Genre: {
+        GenreID: "1",
+        Name: "Animation",
+        Description: "Moving images created from a series of pictures.",
+      },
+      Director: {
+        DirectorID: "1",
+        Name: "Andrew Adamson",
+        Birth: 1966,
+        Bio: "Andrew Adamson is a New Zealand filmmaker known for directing the popular animated films 'Shrek' and 'Shrek 2,' bringing humor and heart to the big screen.",
+      },
+      Featured: "yes",
+      ImageURL:
+        "https://m.media-amazon.com/images/M/MV5BMDJhMGRjN2QtNDUxYy00NGM3LThjNGQtMmZiZTRhNjM4YzUxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg",
     },
+
     {
-      id: 3,
-      title: "JavaScript: The Good Parts",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/5131OWtQRaL._SX381_BO1,204,203,200_.jpg",
-      author: "Douglas Crockford",
-    },
-    {
-      id: 4,
-      title: "JavaScript: The Definitive Guide",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/51HbNW6RzhL._SX218_BO1,204,203,200_QL40_FMwebp_.jpg",
-      author: "David Flanagan",
-    },
-    {
-      id: 5,
-      title: "The Road to React",
-      image:
-        "https://images-na.ssl-images-amazon.com/images/I/41MBLi5a4jL._SX384_BO1,204,203,200_.jpg",
-      author: "Robin Wieruch",
+      ID: "3",
+      title: "Shrek the Third",
+      Description:
+        "Shrek must find a suitable heir to the throne of Far Far Away while dealing with Prince Charming's villainous ambitions",
+      Year: "2007",
+      Genre: {
+        GenreID: "1",
+        Name: "Animation",
+        Description: "Moving images created from a series of pictures.",
+      },
+      Director: {
+        DirectorID: "2",
+        Name: "Chris Miller",
+        Birth: 1966,
+        Bio: "Chris Miller is a versatile director and screenwriter recognized for his work on animated films like 'Shrek the Third' and 'Puss in Boots,' contributing to their witty storytelling and vibrant characters.",
+      },
+      Featured: "yes",
+      ImageURL:
+        "https://m.media-amazon.com/images/M/MV5BOTgyMjc3ODk2MV5BMl5BanBnXkFtZTcwMjY0MjEzMw@@._V1_.jpg",
     },
   ]);
 
-  const [selectedBook, setSelectedBook] = useState(null);
+  const [selectedMovie, setSelectedMovie] = useState(null);
 
-  if (selectedBook) {
+  if (selectedMovie) {
     return (
-      <BookView book={selectedBook} onBackClick={() => setSelectedBook(null)} />
+      <MovieView movie={selectedMovie} onBackClick={() => setSelectedMovie(null)} />
     );
   }
 
-  if (books.length === 0) {
+  if (movies.length === 0) {
     return <div>The list is empty!</div>;
   }
 
   return (
     <div>
-      {books.map((book) => (
-        <BookCard
-          key={book.id}
-          book={book}
-          onBookClick={(newSelectedBook) => {
-            setSelectedBook(newSelectedBook);
+      {movies.map((movie) => (
+        <MovieCard
+          key={movie.id}
+          movie={movie}
+          onMovieClick={(newSelectedMovie) => {
+            setSelectedMovie(newSelectedMovie);
           }}
         />
       ))}
