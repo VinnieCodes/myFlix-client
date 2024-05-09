@@ -27381,79 +27381,31 @@ var _movieView = require("../movie-view/movie-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
-    const [movies, setMovies] = (0, _react.useState)([
-        {
-            ID: "1",
-            title: "Shrek",
-            Description: "A green ogre embarks on a quest to rescue a princess and discovers the true meaning of friendship",
-            Year: "2001",
-            Genre: {
-                GenreID: "1",
-                Name: "Animation",
-                Description: "Moving images created from a series of pictures."
-            },
-            Director: {
-                DirectorID: "1",
-                Name: "Andrew Adamson",
-                Birth: 1966,
-                Bio: "Andrew Adamson is a New Zealand filmmaker known for directing the popular animated films 'Shrek' and 'Shrek 2,' bringing humor and heart to the big screen."
-            },
-            Featured: "yes",
-            ImageURL: "https://m.media-amazon.com/images/M/MV5BOGZhM2FhNTItODAzNi00YjA0LWEyN2UtNjJlYWQzYzU1MDg5L2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_FMjpg_UX1000_.jpg"
-        },
-        {
-            ID: "2",
-            title: "Shrek 2",
-            Description: "Shrek and Fiona visit Fiona's parents in the kingdom of Far Far Away, facing new challenges and humorous adventures",
-            Year: "2004",
-            Genre: {
-                GenreID: "1",
-                Name: "Animation",
-                Description: "Moving images created from a series of pictures."
-            },
-            Director: {
-                DirectorID: "1",
-                Name: "Andrew Adamson",
-                Birth: 1966,
-                Bio: "Andrew Adamson is a New Zealand filmmaker known for directing the popular animated films 'Shrek' and 'Shrek 2,' bringing humor and heart to the big screen."
-            },
-            Featured: "yes",
-            ImageURL: "https://m.media-amazon.com/images/M/MV5BMDJhMGRjN2QtNDUxYy00NGM3LThjNGQtMmZiZTRhNjM4YzUxL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_.jpg"
-        },
-        {
-            ID: "3",
-            title: "Shrek the Third",
-            Description: "Shrek must find a suitable heir to the throne of Far Far Away while dealing with Prince Charming's villainous ambitions",
-            Year: "2007",
-            Genre: {
-                GenreID: "1",
-                Name: "Animation",
-                Description: "Moving images created from a series of pictures."
-            },
-            Director: {
-                DirectorID: "2",
-                Name: "Chris Miller",
-                Birth: 1966,
-                Bio: "Chris Miller is a versatile director and screenwriter recognized for his work on animated films like 'Shrek the Third' and 'Puss in Boots,' contributing to their witty storytelling and vibrant characters."
-            },
-            Featured: "yes",
-            ImageURL: "https://m.media-amazon.com/images/M/MV5BOTgyMjc3ODk2MV5BMl5BanBnXkFtZTcwMjY0MjEzMw@@._V1_.jpg"
-        }
-    ]);
+    const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
+    (0, _react.useEffect)(()=>{
+        fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/movies").then((response)=>response.json()).then((data)=>{
+            const movieFromApi = data.map((movie)=>{
+                return {
+                    ...movie
+                };
+            });
+            setMovies(movieFromApi);
+        });
+    }, []);
     if (selectedMovie) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieView.MovieView), {
         movie: selectedMovie,
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 79,
+        lineNumber: 25,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 84,
+        lineNumber: 33,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27464,16 +27416,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 90,
+                lineNumber: 39,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 88,
+        lineNumber: 37,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "ycl2pFJGroS6UzA5XTtW6eaIiEQ=");
+_s(MainView, "PO+XgOji7E32nFJj3H5UPLPJ7w4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -27525,11 +27477,12 @@ parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "MovieCard", ()=>MovieCard);
 var _jsxDevRuntime = require("react/jsx-dev-runtime");
 const MovieCard = ({ movie, onMovieClick })=>{
+    console.log(movie);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         onClick: ()=>{
             onMovieClick(movie);
         },
-        children: movie.title
+        children: movie.Title
     }, void 0, false, {
         fileName: "src/components/movie-card/movie-card.jsx",
         lineNumber: 3,
@@ -27561,7 +27514,8 @@ const MovieView = ({ movie, onBackClick })=>{
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("img", {
-                    src: movie.ImageURL
+                    src: movie.ImageURL,
+                    width: "400"
                 }, void 0, false, {
                     fileName: "src/components/movie-view/movie-view.jsx",
                     lineNumber: 5,
@@ -27582,7 +27536,7 @@ const MovieView = ({ movie, onBackClick })=>{
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                        children: movie.title
+                        children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-view/movie-view.jsx",
                         lineNumber: 9,
