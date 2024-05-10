@@ -27490,6 +27490,14 @@ const MovieCard = ({ movie, onMovieClick })=>{
     }, undefined);
 };
 _c = MovieCard;
+BookCard.propTypes = {
+    book: PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        image: PropTypes.string.isRequired,
+        author: PropTypes.string
+    }).isRequired,
+    onBookClick: PropTypes.func.isRequired
+};
 var _c;
 $RefreshReg$(_c, "MovieCard");
 
