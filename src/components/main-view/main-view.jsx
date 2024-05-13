@@ -15,12 +15,15 @@ export const MainView = () => {
   useEffect(() => {
     fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/movies", {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization:
+          "Bearer " +
+          `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQyNzcxMzZkOTgyNTRkOWI2MzcyMTEiLCJVc2VybmFtZSI6Im5ld25ldzhhZGYxIiwiUGFzc3dvcmQiOiIkMmIkMTAkZFlwNU1UQllNOWE3TUlKbVh0QU5pT0tTSWN1d0MxM1NBQ3UxQ1B5RDRWc0NhQ2VyRmdBbVMiLCJFbWFpbCI6Im5ld0BnbWFpbC5jb20iLCJCaXJ0aGRheSI6IjIwMDUtMDYtMTZUMDA6MDA6MDAuMDAwWiIsIkZhdm9yaXRlTW92aWVzIjpbXSwiX192IjowLCJpYXQiOjE3MTU2MzE5MDEsImV4cCI6MTcxNjIzNjcwMSwic3ViIjoibmV3bmV3OGFkZjEifQ.38FDouxICwPFxviHsMCVtqDOal33s-QmPGTgWsLJAC8`,
         "Content-type": "application/json",
       },
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         const movieFromApi = data.map((movie) => {
           return { ...movie };
         });
@@ -35,6 +38,8 @@ export const MainView = () => {
           onLoggedIn={(user, token) => {
             setUser(user);
             setToken(token);
+            localStorage.setItem("user", user);
+            localStorage.setItem("token", token);
           }}
         />
         or
