@@ -27383,25 +27383,41 @@ var _signupView = require("../signup-view/signup-view");
 var _s = $RefreshSig$();
 const MainView = ()=>{
     _s();
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedToken = localStorage.getItem("token");
+    const [user, setUser] = (0, _react.useState)(storedUser ? storedUser : null);
+    const [token, setToken] = (0, _react.useState)(storedToken ? storedToken : null);
     const [movies, setMovies] = (0, _react.useState)([]);
     const [selectedMovie, setSelectedMovie] = (0, _react.useState)(null);
-    const [user, setUser] = (0, _react.useState)(null);
-    const [token, setToken] = (0, _react.useState)(null);
     (0, _react.useEffect)(()=>{
+        if (!token) return;
         fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/movies", {
             headers: {
-                Authorization: "Bearer " + localStorage.getItem("token"),
-                "Content-type": "application/json"
+                Authorization: `Bearer ${token}`
             }
-        }).then((response)=>response.json()).then((data)=>{
-            const movieFromApi = data.map((movie)=>{
-                return {
-                    ...movie
-                };
-            });
-            setMovies(movieFromApi);
+        }).then((response)=>response.json()).then((movies)=>{
+            setMovies(movies);
         });
-    }, []);
+    }, [
+        token
+    ]);
+    // useEffect(() => {
+    //   fetch("https://openlibrary.org/search.json?q=star+wars")
+    //     .then((response) => response.json())
+    //     .then((data) => {
+    //       const booksFromApi = data.docs.map((doc) => {
+    //         return {
+    //           id: doc.key,
+    //           title: doc.title,
+    //           image: `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,
+    //           author: doc.author_name?.[0],
+    //         };
+    //       });
+    //       setMovies(booksFromApi);
+    //     });
+    // }, []);
+    // <button onClick={() => { setUser(null); setToken(null); }}>Logout</button>
+    // <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
@@ -27411,13 +27427,13 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 35,
+                lineNumber: 52,
                 columnNumber: 9
             }, undefined),
             "or",
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 42,
+                lineNumber: 59,
                 columnNumber: 9
             }, undefined)
         ]
@@ -27427,14 +27443,14 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 48,
+        lineNumber: 66,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 56,
+        lineNumber: 74,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -27445,16 +27461,16 @@ const MainView = ()=>{
                 }
             }, movie.id, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 62,
+                lineNumber: 80,
                 columnNumber: 9
             }, undefined))
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 60,
+        lineNumber: 78,
         columnNumber: 5
     }, undefined);
 };
-_s(MainView, "ld1mNqbzEgxPu9ZfASjBJ7ZrUMw=");
+_s(MainView, "9wJBvfUyU2IigbyWC+M5y3EH9h4=");
 _c = MainView;
 var _c;
 $RefreshReg$(_c, "MainView");
@@ -28452,14 +28468,19 @@ const LoginView = ({ onLoggedIn })=>{
         };
         fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/login", {
             method: "POST",
-            body: JSON.stringify(data),
             headers: {
-                "Content-type": "application/json"
-            }
-        }).then((response)=>response.json()).then((response)=>{
-            console.log(response);
-            if (response.user) onLoggedIn(response.user.Username, response.token);
-            else alert("Login failed");
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        }).then((response)=>response.json()).then((data)=>{
+            console.log("Login response: ", data);
+            if (data.user) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+                localStorage.setItem("token", data.token);
+                onLoggedIn(data.user, data.token);
+            } else alert("No such user");
+        }).catch((e)=>{
+            alert("Something went wrong");
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
@@ -28475,13 +28496,13 @@ const LoginView = ({ onLoggedIn })=>{
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 35,
+                        lineNumber: 43,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 33,
+                lineNumber: 41,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
@@ -28494,13 +28515,13 @@ const LoginView = ({ onLoggedIn })=>{
                         required: true
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 44,
+                        lineNumber: 52,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 42,
+                lineNumber: 50,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
@@ -28508,13 +28529,13 @@ const LoginView = ({ onLoggedIn })=>{
                 children: "Login"
             }, void 0, false, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 51,
+                lineNumber: 59,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/login-view/login-view.jsx",
-        lineNumber: 32,
+        lineNumber: 40,
         columnNumber: 5
     }, undefined);
 };
@@ -28555,7 +28576,8 @@ const SignupView = ()=>{
             Email: email,
             Birthday: birthday
         };
-        fetch("SIGNUP_URL", {
+        //refactor
+        fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/signup", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {

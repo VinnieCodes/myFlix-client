@@ -6,31 +6,46 @@ import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
 
 export const MainView = () => {
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const storedToken = localStorage.getItem("token");
+  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [token, setToken] = useState(storedToken ? storedToken : null);
   const [movies, setMovies] = useState([]);
-
   const [selectedMovie, setSelectedMovie] = useState(null);
-  const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
-
   useEffect(() => {
+    if (!token) {
+      return;
+    }
+
     fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/movies", {
-      headers: {
-        Authorization:
-          "Bearer " +
-          `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjQyNzcxMzZkOTgyNTRkOWI2MzcyMTEiLCJVc2VybmFtZSI6Im5ld25ldzhhZGYxIiwiUGFzc3dvcmQiOiIkMmIkMTAkZFlwNU1UQllNOWE3TUlKbVh0QU5pT0tTSWN1d0MxM1NBQ3UxQ1B5RDRWc0NhQ2VyRmdBbVMiLCJFbWFpbCI6Im5ld0BnbWFpbC5jb20iLCJCaXJ0aGRheSI6IjIwMDUtMDYtMTZUMDA6MDA6MDAuMDAwWiIsIkZhdm9yaXRlTW92aWVzIjpbXSwiX192IjowLCJpYXQiOjE3MTU2MzE5MDEsImV4cCI6MTcxNjIzNjcwMSwic3ViIjoibmV3bmV3OGFkZjEifQ.38FDouxICwPFxviHsMCVtqDOal33s-QmPGTgWsLJAC8`,
-        "Content-type": "application/json",
-      },
+      headers: { Authorization: `Bearer ${token}` },
     })
       .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        const movieFromApi = data.map((movie) => {
-          return { ...movie };
-        });
-
-        setMovies(movieFromApi);
+      .then((movies) => {
+        setMovies(movies);
       });
-  }, []);
+  }, [token]);
+
+  // useEffect(() => {
+  //   fetch("https://openlibrary.org/search.json?q=star+wars")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       const booksFromApi = data.docs.map((doc) => {
+  //         return {
+  //           id: doc.key,
+  //           title: doc.title,
+  //           image: `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,
+  //           author: doc.author_name?.[0],
+  //         };
+  //       });
+
+  //       setMovies(booksFromApi);
+  //     });
+  // }, []);
+
+  // <button onClick={() => { setUser(null); setToken(null); }}>Logout</button>
+
+  // <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
   if (!user) {
     return (
       <>
@@ -38,8 +53,6 @@ export const MainView = () => {
           onLoggedIn={(user, token) => {
             setUser(user);
             setToken(token);
-            localStorage.setItem("user", user);
-            localStorage.setItem("token", token);
           }}
         />
         or
@@ -47,6 +60,7 @@ export const MainView = () => {
       </>
     );
   }
+
   if (selectedMovie) {
     return (
       <MovieView
