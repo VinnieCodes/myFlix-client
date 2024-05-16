@@ -27401,23 +27401,6 @@ const MainView = ()=>{
     }, [
         token
     ]);
-    // useEffect(() => {
-    //   fetch("https://openlibrary.org/search.json?q=star+wars")
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //       const booksFromApi = data.docs.map((doc) => {
-    //         return {
-    //           id: doc.key,
-    //           title: doc.title,
-    //           image: `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,
-    //           author: doc.author_name?.[0],
-    //         };
-    //       });
-    //       setMovies(booksFromApi);
-    //     });
-    // }, []);
-    // <button onClick={() => { setUser(null); setToken(null); }}>Logout</button>
-    // <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
     if (!user) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _loginView.LoginView), {
@@ -27427,13 +27410,13 @@ const MainView = ()=>{
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 52,
+                lineNumber: 32,
                 columnNumber: 9
             }, undefined),
             "or",
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _signupView.SignupView), {}, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 59,
+                lineNumber: 39,
                 columnNumber: 9
             }, undefined)
         ]
@@ -27443,30 +27426,44 @@ const MainView = ()=>{
         onBackClick: ()=>setSelectedMovie(null)
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 66,
+        lineNumber: 46,
         columnNumber: 7
     }, undefined);
     if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
         children: "The list is empty!"
     }, void 0, false, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 74,
+        lineNumber: 54,
         columnNumber: 12
     }, undefined);
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        children: movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
-                movie: movie,
-                onMovieClick: (newSelectedMovie)=>{
-                    setSelectedMovie(newSelectedMovie);
-                }
-            }, movie.id, false, {
+        children: [
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                onClick: ()=>{
+                    setUser(null);
+                    setToken(null);
+                    localStorage.clear();
+                },
+                children: "Logout"
+            }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 80,
-                columnNumber: 9
-            }, undefined))
-    }, void 0, false, {
+                lineNumber: 59,
+                columnNumber: 7
+            }, undefined),
+            movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
+                    movie: movie,
+                    onMovieClick: (newSelectedMovie)=>{
+                        setSelectedMovie(newSelectedMovie);
+                    }
+                }, movie.id, false, {
+                    fileName: "src/components/main-view/main-view.jsx",
+                    lineNumber: 69,
+                    columnNumber: 9
+                }, undefined))
+        ]
+    }, void 0, true, {
         fileName: "src/components/main-view/main-view.jsx",
-        lineNumber: 78,
+        lineNumber: 58,
         columnNumber: 5
     }, undefined);
 };
@@ -28577,7 +28574,7 @@ const SignupView = ()=>{
             Birthday: birthday
         };
         //refactor
-        fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/signup", {
+        fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/users", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
