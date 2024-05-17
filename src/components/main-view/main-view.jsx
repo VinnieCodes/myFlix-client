@@ -26,26 +26,6 @@ export const MainView = () => {
       });
   }, [token]);
 
-  // useEffect(() => {
-  //   fetch("https://openlibrary.org/search.json?q=star+wars")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       const booksFromApi = data.docs.map((doc) => {
-  //         return {
-  //           id: doc.key,
-  //           title: doc.title,
-  //           image: `https://covers.openlibrary.org/b/id/${doc.cover_i}-L.jpg`,
-  //           author: doc.author_name?.[0],
-  //         };
-  //       });
-
-  //       setMovies(booksFromApi);
-  //     });
-  // }, []);
-
-  // <button onClick={() => { setUser(null); setToken(null); }}>Logout</button>
-
-  // <button onClick={() => { setUser(null); setToken(null); localStorage.clear(); }}>Logout</button>
   if (!user) {
     return (
       <>
@@ -76,6 +56,15 @@ export const MainView = () => {
 
   return (
     <div>
+      <button
+        onClick={() => {
+          setUser(null);
+          setToken(null);
+          localStorage.clear();
+        }}
+      >
+        Logout
+      </button>
       {movies.map((movie) => (
         <MovieCard
           key={movie.id}
