@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="light" expand="md">
       <Container>
         <Navbar.Brand as={Link} to="/">
           Movies App
@@ -27,7 +27,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
                   Home
                 </Nav.Link>
                 {/*30-32 for profile */}
-                <Nav.Link as={Link} to="/signup">
+                <Nav.Link as={Link} to="/profile">
                   Profile
                 </Nav.Link>
                 <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
