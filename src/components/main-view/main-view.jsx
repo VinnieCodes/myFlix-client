@@ -129,6 +129,7 @@ export const MainView = () => {
                           onMovieClick={(newSelectedMovie) => {
                             setSelectedMovie(newSelectedMovie);
                           }}
+                          user={user}
                         />
                       </Col>
                     ))}

@@ -27582,7 +27582,8 @@ const MainView = ()=>{
                                                 movie: movie,
                                                 onMovieClick: (newSelectedMovie)=>{
                                                     setSelectedMovie(newSelectedMovie);
-                                                }
+                                                },
+                                                user: user
                                             }, movie.id, false, {
                                                 fileName: "src/components/main-view/main-view.jsx",
                                                 lineNumber: 126,
@@ -27643,8 +27644,40 @@ var _propTypes = require("prop-types");
 var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
-const MovieCard = ({ movie })=>{
+const MovieCard = ({ movie, user })=>{
     console.log(movie);
+    const addFavorite = (event)=>{
+        event.preventDefault();
+        fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/users/" + user.Username + "/movies/" + movie._id, {
+            method: "POST",
+            body: JSON.stringify({}),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        }).then((response)=>{
+            if (response.ok) {
+                alert("Update Successful");
+                window.location.reload();
+            } else alert("Update failed");
+        });
+    };
+    const removeFavorite = (event)=>{
+        event.preventDefault();
+        fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/users/" + user.Username + "/movies/" + movie._id, {
+            method: "DELETE",
+            body: JSON.stringify({}),
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+        }).then((response)=>{
+            if (response.ok) {
+                alert("Update Successful");
+                window.location.reload();
+            } else alert("Update failed");
+        });
+    };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
         className: "h-100",
         children: [
@@ -27653,7 +27686,7 @@ const MovieCard = ({ movie })=>{
                 src: movie.ImageURL
             }, void 0, false, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 9,
+                lineNumber: 59,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Body, {
@@ -27662,14 +27695,14 @@ const MovieCard = ({ movie })=>{
                         children: movie.Title
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 11,
+                        lineNumber: 61,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
                         children: movie.Genre.Name
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 12,
+                        lineNumber: 62,
                         columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactRouterDom.Link), {
@@ -27679,24 +27712,42 @@ const MovieCard = ({ movie })=>{
                             children: "Open"
                         }, void 0, false, {
                             fileName: "src/components/movie-card/movie-card.jsx",
-                            lineNumber: 14,
+                            lineNumber: 64,
                             columnNumber: 11
                         }, undefined)
                     }, void 0, false, {
                         fileName: "src/components/movie-card/movie-card.jsx",
-                        lineNumber: 13,
+                        lineNumber: 63,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                        variant: "link",
+                        onClick: addFavorite,
+                        children: "Add to Favorite"
+                    }, void 0, false, {
+                        fileName: "src/components/movie-card/movie-card.jsx",
+                        lineNumber: 66,
+                        columnNumber: 9
+                    }, undefined),
+                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Button), {
+                        variant: "link",
+                        onClick: removeFavorite,
+                        children: "Remove from Favorite"
+                    }, void 0, false, {
+                        fileName: "src/components/movie-card/movie-card.jsx",
+                        lineNumber: 69,
                         columnNumber: 9
                     }, undefined)
                 ]
             }, void 0, true, {
                 fileName: "src/components/movie-card/movie-card.jsx",
-                lineNumber: 10,
+                lineNumber: 60,
                 columnNumber: 7
             }, undefined)
         ]
     }, void 0, true, {
         fileName: "src/components/movie-card/movie-card.jsx",
-        lineNumber: 8,
+        lineNumber: 58,
         columnNumber: 5
     }, undefined);
 };
@@ -42368,7 +42419,8 @@ const ProfileView = ({ movies, user, setSelectedMovie })=>{
                     movie: movie,
                     onMovieClick: (newSelectedMovie)=>{
                         setSelectedMovie(newSelectedMovie);
-                    }
+                    },
+                    user: user
                 }, movie._id, false, {
                     fileName: "src/components/profile-view/profile-view.jsx",
                     lineNumber: 99,

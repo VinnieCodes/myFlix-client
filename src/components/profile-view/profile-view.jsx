@@ -102,6 +102,7 @@ export const ProfileView = ({ movies, user, setSelectedMovie }) => {
             onMovieClick={(newSelectedMovie) => {
               setSelectedMovie(newSelectedMovie);
             }}
+            user={user}
           />
         );
       })}
