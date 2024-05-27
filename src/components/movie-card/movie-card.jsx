@@ -22,10 +22,10 @@ export const MovieCard = ({ movie, user }) => {
       }
     ).then((response) => {
       if (response.ok) {
-        alert("Update Successful");
+        alert("Addition Successful");
         window.location.reload();
       } else {
-        alert("Update failed");
+        alert("Addition failed");
       }
     });
   };
@@ -47,10 +47,10 @@ export const MovieCard = ({ movie, user }) => {
       }
     ).then((response) => {
       if (response.ok) {
-        alert("Update Successful");
+        alert("Remove Successful");
         window.location.reload();
       } else {
-        alert("Update failed");
+        alert("Remove failed");
       }
     });
   };

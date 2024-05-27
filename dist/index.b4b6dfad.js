@@ -27657,9 +27657,9 @@ const MovieCard = ({ movie, user })=>{
             }
         }).then((response)=>{
             if (response.ok) {
-                alert("Update Successful");
+                alert("Addition Successful");
                 window.location.reload();
-            } else alert("Update failed");
+            } else alert("Addition failed");
         });
     };
     const removeFavorite = (event)=>{
@@ -27673,9 +27673,9 @@ const MovieCard = ({ movie, user })=>{
             }
         }).then((response)=>{
             if (response.ok) {
-                alert("Update Successful");
+                alert("Remove Successful");
                 window.location.reload();
-            } else alert("Update failed");
+            } else alert("Remove failed");
         });
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
