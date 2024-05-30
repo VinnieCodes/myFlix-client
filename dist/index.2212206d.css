@@ -1,5 +1,13 @@
-.my-flix {
-  color: #4682b4;
+.back-button {
+  color: #f5f5f5;
+  background-color: #1e90ff;
+  border: none;
+  border-radius: 4px;
+  padding: 4px 12px;
+}
+
+img {
+  width: 100%;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -6256,16 +6264,8 @@
   }
 }
 
-.back-button {
-  color: #f5f5f5;
-  background-color: #1e90ff;
-  border: none;
-  border-radius: 4px;
-  padding: 4px 12px;
-}
-
-img {
-  width: 100%;
+.my-flix {
+  color: #4682b4;
 }
 
 :root, [data-bs-theme="light"] {
@@ -6389,8 +6389,6 @@ img {
 }
 
 [data-bs-theme="dark"] {
-  --lightningcss-light: ;
-  --lightningcss-dark: initial;
   color-scheme: dark;
   --bs-body-color: #dee2e6;
   --bs-body-color-rgb: 222, 226, 230;
