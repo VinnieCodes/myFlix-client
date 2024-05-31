@@ -2,6 +2,7 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { MovieCard } from "../movie-card/movie-card";
+import Col from "react-bootstrap/Col";
 
 export const ProfileView = ({ movies, user, setSelectedMovie }) => {
   console.log(movies);
@@ -87,23 +88,26 @@ export const ProfileView = ({ movies, user, setSelectedMovie }) => {
             required
             minLength="3"
           />
-        </Form.Group>
+        </Form.Group><br/>
         <Button variant="primary" type="submit">
-          Submit
+          Submit changes
         </Button>
       </Form>
       <h1>Favorite Movies</h1>
-      <hr />
+      <br
+      />
       {result.map((movie) => {
         return (
-          <MovieCard
-            key={movie._id}
-            movie={movie}
-            onMovieClick={(newSelectedMovie) => {
-              setSelectedMovie(newSelectedMovie);
-            }}
-            user={user}
-          />
+          <Col className="mb-4" lg={4} md={6} >
+            <MovieCard
+              key={movie._id}
+              movie={movie}
+              onMovieClick={(newSelectedMovie) => {
+                setSelectedMovie(newSelectedMovie);
+              }}
+              user={user}
+            />
+          </Col>
         );
       })}
     </div>

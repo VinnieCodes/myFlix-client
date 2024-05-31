@@ -64,10 +64,10 @@ export const MovieCard = ({ movie, user }) => {
           <Button variant="link">Open</Button>
         </Link>
         <Button variant="link" onClick={addFavorite}>
-          Add to Favorite
+          Favorite
         </Button>
         <Button variant="link" onClick={removeFavorite}>
-          Remove from Favorite
+          Remove
         </Button>
       </Card.Body>
     </Card>
