@@ -42386,8 +42386,8 @@ const ProfileView = ({ movies, user, setSelectedMovie })=>{
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 91,
-                        columnNumber: 22
+                        lineNumber: 92,
+                        columnNumber: 9
                     }, undefined),
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                         variant: "primary",
@@ -42395,7 +42395,7 @@ const ProfileView = ({ movies, user, setSelectedMovie })=>{
                         children: "Submit changes"
                     }, void 0, false, {
                         fileName: "src/components/profile-view/profile-view.jsx",
-                        lineNumber: 92,
+                        lineNumber: 93,
                         columnNumber: 9
                     }, undefined)
                 ]
@@ -42408,12 +42408,12 @@ const ProfileView = ({ movies, user, setSelectedMovie })=>{
                 children: "Favorite Movies"
             }, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 96,
+                lineNumber: 97,
                 columnNumber: 7
             }, undefined),
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("br", {}, void 0, false, {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 97,
+                lineNumber: 98,
                 columnNumber: 7
             }, undefined),
             result.map((movie)=>{

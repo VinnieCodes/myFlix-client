@@ -88,17 +88,17 @@ export const ProfileView = ({ movies, user, setSelectedMovie }) => {
             required
             minLength="3"
           />
-        </Form.Group><br/>
+        </Form.Group>
+        <br />
         <Button variant="primary" type="submit">
           Submit changes
         </Button>
       </Form>
       <h1>Favorite Movies</h1>
-      <br
-      />
+      <br />
       {result.map((movie) => {
         return (
-          <Col className="mb-4" lg={4} md={6} >
+          <Col className="mb-4" lg={4} md={6}>
             <MovieCard
               key={movie._id}
               movie={movie}
