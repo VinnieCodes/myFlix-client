@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { MovieCard } from "../movie-card/movie-card";
 import Col from "react-bootstrap/Col";
+
 
 export const ProfileView = ({ movies, user, setSelectedMovie }) => {
   console.log(movies);
@@ -11,6 +12,7 @@ export const ProfileView = ({ movies, user, setSelectedMovie }) => {
   const [password, setPassword] = useState(user.Password);
   const [email, setEmail] = useState(user.Email);
   const [birthday, setBirthday] = useState(user.Birthday);
+  
 
   let result = movies.filter((m) => user.FavoriteMovies.includes(m._id));
   console.log(result);

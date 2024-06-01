@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+
 export const MovieCard = ({ movie, user }) => {
   console.log(movie);
   const addFavorite = (event) => {
     event.preventDefault();
-
     fetch(
       "https://movieflixer-b13bdd05bf25.herokuapp.com/users/" +
         user.Username +
