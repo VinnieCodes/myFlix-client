@@ -10,6 +10,14 @@ import Col from "react-bootstrap/Col";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { ProfileView } from "../profile-view/profile-view";
 
+// import { getMovies, setMovies, filterMovies } from "./actions";
+// import "./index.scss";
+
+import { createStore } from "redux";
+// import movies from "./reducers";
+
+const store = createStore(todos);
+
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
