@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-
 export const MovieCard = ({ movie, user }) => {
   console.log(movie);
   const addFavorite = (event) => {
@@ -20,14 +19,16 @@ export const MovieCard = ({ movie, user }) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
-    ).then((response) => {
-      if (response.ok) {
+    )
+      .then((response) => response.json())
+      .then((response) => {
+        if (response.ok) {
         alert("Addition Successful");
         window.location.reload();
       } else {
         alert("Addition failed");
-      }
-    });
+      } 
+      });
   };
   const removeFavorite = (event) => {
     event.preventDefault();

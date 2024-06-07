@@ -12,10 +12,14 @@ export const ProfileView = ({ movies, user, setSelectedMovie }) => {
   const [password, setPassword] = useState(user.Password);
   const [email, setEmail] = useState(user.Email);
   const [birthday, setBirthday] = useState(user.Birthday);
+  const [result, setResult] = useState([]);
   
 
-  let result = movies.filter((m) => user.FavoriteMovies.includes(m._id));
-  console.log(result);
+  // let result = movies.filter((m) => user.FavoriteMovies.includes(m._id));
+  // console.log(result);
+  useEffect(() => {
+    setResult(movies.filter((m) => user.FavoriteMovies.includes(m._id)));
+  }, [movies, user.FavoriteMovies]);
   const handleSubmit = (event) => {
     event.preventDefault();
 
