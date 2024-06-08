@@ -16,7 +16,7 @@ import { ProfileView } from "../profile-view/profile-view";
 import { createStore } from "redux";
 // import movies from "./reducers";
 
-const store = createStore(todos);
+// const store = createStore(todos);
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
