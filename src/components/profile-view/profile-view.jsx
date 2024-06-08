@@ -17,6 +17,11 @@ export const ProfileView = ({ movies, user, setSelectedMovie }) => {
 
   // let result = movies.filter((m) => user.FavoriteMovies.includes(m._id));
   // console.log(result);
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  if (user.FavoriteMovies.includes(movie._id)) {
+    setIsFavorite(true);
+  }
   useEffect(() => {
     setResult(movies.filter((m) => user.FavoriteMovies.includes(m._id)));
   }, [movies, user.FavoriteMovies]);
