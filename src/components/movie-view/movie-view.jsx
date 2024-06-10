@@ -29,8 +29,6 @@ export const MovieView = ({
             <h2>{movie.Title}</h2>
           </Card.Title>
           <Card.Text>
-            {/* <strong>Year:</strong> {movie.ReleaseYear}
-            <br /> */}
             <strong>Genre:</strong> {movie.Genre.Name}
             <br />
             <strong>Director:</strong> {movie.Director.Name}
