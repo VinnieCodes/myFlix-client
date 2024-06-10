@@ -27738,7 +27738,7 @@ var _reactBootstrap = require("react-bootstrap");
 var _reactRouterDom = require("react-router-dom");
 const MovieCard = ({ movie })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card), {
-        className: "movie-card h-100",
+        className: "h-100",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Img, {
                 variant: "top",
@@ -42846,7 +42846,6 @@ const MovieView = ({ movies, findSimilarMovies, onFavorite, isFavorite })=>{
                                 to: `/`,
                                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _buttonDefault.default), {
                                     variant: "light",
-                                    className: "me-2",
                                     children: "Back"
                                 }, void 0, false, {
                                     fileName: "src/components/movie-view/movie-view.jsx",
@@ -43677,25 +43676,21 @@ var _reactBootstrap = require("react-bootstrap");
 var _movieCard = require("../movie-card/movie-card");
 const FavoritesView = ({ movies, onFavorite })=>{
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-        className: "favorites-view",
         children: [
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h2", {
-                className: "favorites-title",
                 children: "Your Favorite Movies"
             }, void 0, false, {
                 fileName: "src/components/favorites-view/favorites-view.jsx",
                 lineNumber: 9,
                 columnNumber: 7
             }, undefined),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {
-                className: "favorites-divider"
-            }, void 0, false, {
+            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("hr", {}, void 0, false, {
                 fileName: "src/components/favorites-view/favorites-view.jsx",
                 lineNumber: 10,
                 columnNumber: 7
             }, undefined),
             movies.length === 0 ? /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("p", {
-                children: "Nothing here :("
+                children: "Nothing yet"
             }, void 0, false, {
                 fileName: "src/components/favorites-view/favorites-view.jsx",
                 lineNumber: 12,
@@ -43706,7 +43701,7 @@ const FavoritesView = ({ movies, onFavorite })=>{
                         sm: 6,
                         md: 4,
                         lg: 3,
-                        className: "movie-card-container mb-5",
+                        className: "mb-5",
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                             movie: movie,
                             onFavorite: ()=>onFavorite(movie)

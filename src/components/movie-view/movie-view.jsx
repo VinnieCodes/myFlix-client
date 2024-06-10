@@ -37,7 +37,7 @@ export const MovieView = ({
             <strong>Description:</strong> {movie.Description}
           </Card.Text>
           <Link to={`/`}>
-            <Button variant="light" className="me-2">
+            <Button variant="light">
               Back
             </Button>
           </Link>

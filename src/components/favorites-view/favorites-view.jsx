@@ -5,11 +5,11 @@ import { MovieCard } from "../movie-card/movie-card";
 
 export const FavoritesView = ({ movies, onFavorite }) => {
   return (
-    <div className="favorites-view">
-      <h2 className="favorites-title">Your Favorite Movies</h2>
-      <hr className="favorites-divider" />
+    <div>
+      <h2>Your Favorite Movies</h2>
+      <hr />
       {movies.length === 0 ? (
-        <p>Nothing here :(</p>
+        <p>Nothing yet</p>
       ) : (
         <Row>
           {movies.map((movie) => (
@@ -19,7 +19,7 @@ export const FavoritesView = ({ movies, onFavorite }) => {
               md={4}
               lg={3}
               key={movie._id}
-              className="movie-card-container mb-5"
+              className="mb-5"
             >
               <MovieCard movie={movie} onFavorite={() => onFavorite(movie)} />
             </Col>
