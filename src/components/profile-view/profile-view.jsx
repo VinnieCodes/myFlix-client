@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Button, Form, Row, Col, Alert, Modal } from "react-bootstrap";
+import { MovieCard } from "../movie-card/movie-card";
 
 export const ProfileView = ({
   user,
   onLoggedOut,
   onUserUpdate,
   onUserDelete,
+  movies,
   token,
 }) => {
   const [username, setUsername] = useState(user.Username);
@@ -15,7 +17,7 @@ export const ProfileView = ({
   const [birthday, setBirthday] = useState("");
   const [updateMessage, setUpdateMessage] = useState("");
   const [showDeleteModal, setShowDeleteModal] = useState(false);
-//sus
+
   useEffect(() => {
     if (user.Birthday) {
       setBirthday(new Date(user.Birthday).toISOString().split("T")[0]);
@@ -116,6 +118,15 @@ export const ProfileView = ({
             </Button>
           </Modal.Footer>
         </Modal>
+      </Col>
+      <Col md={6}>
+        <h2 className="profile-title">Favorite Movies</h2>
+        <hr className="profile-divider" />
+        <Row>
+          {user.FavoriteMovies.map((movieId) => (
+            <MovieCard key={movieId} movie={movies.find((m) => m._id === movieId)} movieId={movieId} />
+          ))}
+        </Row>
       </Col>
     </Row>
   );

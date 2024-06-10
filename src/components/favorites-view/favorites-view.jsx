@@ -36,9 +36,9 @@ FavoritesView.propTypes = {
       _id: PropTypes.string.isRequired,
       Title: PropTypes.string.isRequired,
       ImageURL: PropTypes.string.isRequired,
-      DirectorName: PropTypes.shape({
-        Name: PropTypes.string.isRequired,
-      }).isRequired,
+      // DirectorName: PropTypes.shape({
+      //   Name: PropTypes.string.isRequired,
+      // }).isRequired,
       Genre: PropTypes.shape({
         Name: PropTypes.string.isRequired,
       }).isRequired,

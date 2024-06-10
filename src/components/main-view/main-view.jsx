@@ -164,6 +164,7 @@ export const MainView = () => {
   };
 
   const handleFavorite = (movie) => {
+    console.log("Hey");
     if (user.FavoriteMovies.includes(movie._id)) {
       removeFavorite(movie);
     } else {
@@ -205,9 +206,9 @@ export const MainView = () => {
                   <Nav.Link as={Link} to="/profile">
                     Profile
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/favorites">
+                  {/* <Nav.Link as={Link} to="/favorites">
                     Favorites
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Button variant="light" onClick={handleLogout}>
                     Logout
                   </Button>
@@ -255,7 +256,7 @@ export const MainView = () => {
                       key={movie._id}
                       className="movie-card-container mb-5"
                     >
-                      <MovieCard movie={movie} />
+                      <MovieCard user={user} movie={movie} />
                     </Col>
                   ))}
                 </Row>
@@ -288,13 +289,14 @@ export const MainView = () => {
                   onUserUpdate={handleUserUpdate}
                   onUserDelete={handleUserDelete}
                   token={token}
+                  movies={movies}
                 />
               ) : (
                 <Navigate to="/login" replace />
               )
             }
           />
-          <Route
+          {/* <Route
             path="/favorites"
             element={
               user ? (
@@ -308,7 +310,7 @@ export const MainView = () => {
                 <Navigate to="/login" replace />
               )
             }
-          />
+          /> */}
           <Route
             path="/movies/:movieId"
             element={
