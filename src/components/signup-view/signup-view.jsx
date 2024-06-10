@@ -1,6 +1,7 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
+import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -17,7 +18,7 @@ export const SignupView = () => {
       Email: email,
       Birthday: birthday,
     };
-//refactor
+
     fetch("https://movieflixer-b13bdd05bf25.herokuapp.com/users", {
       method: "POST",
       body: JSON.stringify(data),
@@ -35,7 +36,7 @@ export const SignupView = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form className="signup-view" onSubmit={handleSubmit}>
       <Form.Group controlId="formUsername">
         <Form.Label>Username:</Form.Label>
         <Form.Control
@@ -57,30 +58,33 @@ export const SignupView = () => {
         />
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group>
         <Form.Label>Email:</Form.Label>
         <Form.Control
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          minLength="3"
         />
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group>
         <Form.Label>Birthday:</Form.Label>
         <Form.Control
           type="date"
           value={birthday}
           onChange={(e) => setBirthday(e.target.value)}
           required
-          minLength="3"
         />
       </Form.Group>
+      <br></br>
       <Button variant="primary" type="submit">
-        Submit
+        Signup
       </Button>
     </Form>
   );
+};
+
+SignupView.propTypes = {
+  onLoggedIn: PropTypes.func,
 };

@@ -2,74 +2,18 @@ import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const MovieCard = ({ movie, user }) => {
-  console.log(movie);
-  const addFavorite = (event) => {
-    event.preventDefault();
-    fetch(
-      "https://movieflixer-b13bdd05bf25.herokuapp.com/users/" +
-        user.Username +
-        "/movies/" +
-        movie._id,
-      {
-        method: "POST",
-        body: JSON.stringify({}),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        if (response.ok) {
-        alert("Addition Successful");
-        window.location.reload();
-      } else {
-        alert("Addition failed");
-      } 
-      });
-  };
-  const removeFavorite = (event) => {
-    event.preventDefault();
-
-    fetch(
-      "https://movieflixer-b13bdd05bf25.herokuapp.com/users/" +
-        user.Username +
-        "/movies/" +
-        movie._id,
-      {
-        method: "DELETE",
-        body: JSON.stringify({}),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    ).then((response) => {
-      if (response.ok) {
-        alert("Remove Successful");
-        window.location.reload();
-      } else {
-        alert("Remove failed");
-      }
-    });
-  };
+export const MovieCard = ({ movie }) => {
   return (
-    <Card className="h-100">
-      <Card.Img variant="top" src={movie.ImageURL} />
+    <Card className="movie-card h-100">
+      <div className="ratio ratio-16x9">
+        <Card.Img variant="top" src={movie.ImageURL} />
+      </div>
       <Card.Body>
         <Card.Title>{movie.Title}</Card.Title>
-        <Card.Text>{movie.Genre.Name}</Card.Text>
+        <Card.Text>{movie.Director.Name}</Card.Text>
         <Link to={`/movies/${encodeURIComponent(movie._id)}`}>
-          <Button variant="link">Open</Button>
+          <Button variant="outline-light">Open</Button>
         </Link>
-        <Button variant="link" onClick={addFavorite}>
-          Favorite
-        </Button>
-        <Button variant="link" onClick={removeFavorite}>
-          Remove
-        </Button>
       </Card.Body>
     </Card>
   );
@@ -79,9 +23,11 @@ MovieCard.propTypes = {
   movie: PropTypes.shape({
     Title: PropTypes.string.isRequired,
     ImageURL: PropTypes.string.isRequired,
-    DirectorName: PropTypes.string,
-    Description: PropTypes.string,
-    GenreName: PropTypes.string,
+    Director: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+    }).isRequired,
+    Genre: PropTypes.shape({
+      Name: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
 };
