@@ -164,6 +164,7 @@ export const MainView = () => {
   };
 
   const handleFavorite = (movie) => {
+    console.log("Hey");
     if (user.FavoriteMovies.includes(movie._id)) {
       removeFavorite(movie);
     } else {
@@ -255,7 +256,7 @@ export const MainView = () => {
                       key={movie._id}
                       className="movie-card-container mb-5"
                     >
-                      <MovieCard movie={movie} />
+                      <MovieCard user={user} movie={movie} />
                     </Col>
                   ))}
                 </Row>

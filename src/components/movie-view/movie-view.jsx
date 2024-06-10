@@ -10,7 +10,7 @@ import { useParams, Link } from "react-router-dom";
 export const MovieView = ({
   movies,
   findSimilarMovies,
-  onFavorite,
+  onFavorite = () => {},
   isFavorite,
 }) => {
   const { movieId } = useParams();
@@ -37,11 +37,15 @@ export const MovieView = ({
             <strong>Description:</strong> {movie.Description}
           </Card.Text>
           <Link to={`/`}>
-            <Button variant="light">
-              Back
-            </Button>
+            <Button variant="light">Back</Button>
           </Link>
-          <Button variant="outline-primary" onClick={() => onFavorite(movie)}>
+          <Button
+            variant="outline-primary"
+            onClick={() => {
+              console.log("Hi");
+              onFavorite(movie);
+            }}
+          >
             {isFavorite(movie._id) ? "Remove from Favorites" : "Favorite"}
           </Button>
         </Card.Body>
