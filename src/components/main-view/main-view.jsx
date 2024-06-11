@@ -206,9 +206,9 @@ export const MainView = () => {
                   <Nav.Link as={Link} to="/profile">
                     Profile
                   </Nav.Link>
-                  <Nav.Link as={Link} to="/favorites">
+                  {/* <Nav.Link as={Link} to="/favorites">
                     Favorites
-                  </Nav.Link>
+                  </Nav.Link> */}
                   <Button variant="light" onClick={handleLogout}>
                     Logout
                   </Button>
@@ -289,13 +289,14 @@ export const MainView = () => {
                   onUserUpdate={handleUserUpdate}
                   onUserDelete={handleUserDelete}
                   token={token}
+                  movies={movies}
                 />
               ) : (
                 <Navigate to="/login" replace />
               )
             }
           />
-          <Route
+          {/* <Route
             path="/favorites"
             element={
               user ? (
@@ -309,7 +310,7 @@ export const MainView = () => {
                 <Navigate to="/login" replace />
               )
             }
-          />
+          /> */}
           <Route
             path="/movies/:movieId"
             element={

@@ -1,21 +1,27 @@
 import PropTypes from "prop-types";
+import { useState } from "react";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const MovieCard = ({ movie }) => {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const initialUser = JSON.parse(localStorage.getItem("user"));
   const token = localStorage.getItem("token");
-  console.log(user);
+  
+  const [user, setUser] = useState(initialUser);
 
   const addFavorite = async (movie) => {
     try {
+      if (!user || !token) {
+        throw new Error("User or token not found");
+      }
+
       const response = await fetch(
         `https://movieflixer-b13bdd05bf25.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
         {
           method: "POST",
           headers: {
             Authorization: `Bearer ${token}`,
-            Content: "application/json",
+            "Content-Type": "application/json",
           },
         }
       );
@@ -28,6 +34,7 @@ export const MovieCard = ({ movie }) => {
       };
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
+      location.href = "/profile";
     } catch (error) {
       console.error("Error adding favorite movie:", error.message);
     }
@@ -35,6 +42,10 @@ export const MovieCard = ({ movie }) => {
 
   const removeFavorite = async (movie) => {
     try {
+      if (!user || !token) {
+        throw new Error("User or token not found");
+      }
+
       const response = await fetch(
         `https://movieflixer-b13bdd05bf25.herokuapp.com/users/${user.Username}/movies/${movie._id}`,
         {
@@ -51,13 +62,18 @@ export const MovieCard = ({ movie }) => {
       };
       setUser(updatedUser);
       localStorage.setItem("user", JSON.stringify(updatedUser));
+      location.href = "/profile";
     } catch (error) {
       console.error("Error removing favorite movie:", error.message);
     }
   };
 
   const handleFavorite = (movie) => {
-    console.log("Hey");
+    if (!user || !token) {
+      console.error("User or token not found");
+      return;
+    }
+
     if (user.FavoriteMovies.includes(movie._id)) {
       removeFavorite(movie);
       alert("Removed!");
@@ -66,6 +82,14 @@ export const MovieCard = ({ movie }) => {
       alert("Added!");
     }
   };
+
+   const isFavorite = (movieId) => {
+    return user.FavoriteMovies.includes(movieId);
+  };
+
+  if (!movie) {
+    return null; // or return a placeholder UI if the movie is not defined
+  }
 
   return (
     <Card className="h-100">
@@ -85,6 +109,14 @@ export const MovieCard = ({ movie }) => {
             +/-
           </Button>
         </Link>
+        <Button
+          variant="outline-primary"
+          onClick={() => {
+            handleFavorite(movie);
+          }}
+        >
+          {isFavorite(movie._id) ? "Remove from favorites" : "Add to favorites"}
+        </Button>
       </Card.Body>
     </Card>
   );
@@ -100,5 +132,6 @@ MovieCard.propTypes = {
     Genre: PropTypes.shape({
       Name: PropTypes.string.isRequired,
     }).isRequired,
+    _id: PropTypes.string.isRequired,
   }).isRequired,
 };
